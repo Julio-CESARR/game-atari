@@ -38,7 +38,8 @@ body {
 }
 
 #ui-layer {
-    width: 480px; /* Scaled down from 640 */
+    width: 100%; /* Take full width of container */
+    max-width: 600px; 
     display: flex;
     justify-content: space-between;
     padding: 0 10px;
@@ -67,7 +68,8 @@ body {
 }
 
 #bottom-ui {
-    width: 480px;
+    width: 100%;
+    max-width: 600px;
     padding: 10px 10px;
     display: flex;
     justify-content: flex-start;
@@ -88,10 +90,9 @@ body {
 
 #canvas-wrapper {
     position: relative;
-    max-height: 85vh; /* Larger limit to make maze bigger */
+    height: 85vh; /* Force height to 85% of screen */
     aspect-ratio: 160 / 192;
     width: auto;
-    height: auto;
     border: 10px solid #222;
     border-radius: 15px;
     overflow: hidden;
