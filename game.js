@@ -46,7 +46,8 @@ class Game {
     bindEvents() {
         window.addEventListener('keydown', (e) => {
             if (this.state === 'INIT' || this.state === 'GAMEOVER') {
-                if (e.key === 'Enter') {
+                if (e.key === 'Enter' || e.code === 'Enter') {
+                    console.log("Game Start Triggered");
                     this.start();
                 }
                 return;
