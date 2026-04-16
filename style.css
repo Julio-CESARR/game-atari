@@ -38,10 +38,10 @@ body {
 }
 
 #ui-layer {
-    width: 640px;
+    width: 480px; /* Scaled down from 640 */
     display: flex;
     justify-content: space-between;
-    padding: 0 20px;
+    padding: 0 10px;
 }
 
 .score-container {
@@ -67,8 +67,8 @@ body {
 }
 
 #bottom-ui {
-    width: 640px;
-    padding: 10px 20px;
+    width: 480px;
+    padding: 10px 10px;
     display: flex;
     justify-content: flex-start;
 }
@@ -88,12 +88,15 @@ body {
 
 #canvas-wrapper {
     position: relative;
-    width: 640px; /* 160 * 4 */
-    height: 768px; /* 192 * 4 */
-    border: 15px solid #222;
-    border-radius: 30px;
+    max-height: 70vh; /* Ensures it never takes too much vertical space */
+    aspect-ratio: 160 / 192;
+    width: auto;
+    height: auto;
+    border: 10px solid #222;
+    border-radius: 20px;
     overflow: hidden;
     box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+    display: flex; /* To contain canvas correctly */
 }
 
 #game-canvas {
@@ -184,7 +187,7 @@ body {
 }
 
 #game-logo .muncher {
-    font-size: 3.5rem;
+    font-size: 2.5rem;
     background: linear-gradient(to bottom, var(--atari-yellow) 50%, #ffcc00 50%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;

@@ -173,9 +173,16 @@ class Ghost extends Entity {
                     const dist = Math.sqrt((tile.col - target.col)**2 + (tile.row - target.row)**2);
                     if (dist < 8) target = { col: 1, row: 1 };
                 }
-                const moves = [DIRECTIONS.UP, DIRECTIONS.DOWN, DIRECTIONS.LEFT, DIRECTIONS.RIGHT]
+                let moves = [DIRECTIONS.UP, DIRECTIONS.DOWN, DIRECTIONS.LEFT, DIRECTIONS.RIGHT]
                     .filter(d => d.x !== -this.dir.x || d.y !== -this.dir.y)
                     .filter(d => !isWall(tile.col + d.x, tile.row + d.y, maze));
+                
+                if (moves.length === 0) {
+                    // Dead end: Allow reversal
+                    moves = [DIRECTIONS.UP, DIRECTIONS.DOWN, DIRECTIONS.LEFT, DIRECTIONS.RIGHT]
+                        .filter(d => !isWall(tile.col + d.x, tile.row + d.y, maze));
+                }
+
                 if (moves.length > 0) {
                     moves.sort((a, b) => {
                         const distA = (tile.col + a.x - target.col)**2 + (tile.row + a.y - target.row)**2;
@@ -278,7 +285,19 @@ class Game {
         this.updateLivesUI();
         this.state = 'DEATH'; audio.playDeath();
         if (this.lives <= 0) this.gameOver();
-        else setTimeout(() => { this.muncher.x = 80; this.muncher.y = 120; this.state = 'PLAYING'; }, 2000);
+        else {
+            setTimeout(() => { 
+                this.muncher.x = 80; 
+                this.muncher.y = 120;
+                this.ghosts.forEach(g => {
+                    g.x = g.home.col * 8;
+                    g.y = g.home.row * 8;
+                    g.dir = DIRECTIONS.RIGHT;
+                    g.nextDir = null;
+                });
+                this.state = 'PLAYING'; 
+            }, 2000);
+        }
     }
     gameOver() {
         this.state = 'GAMEOVER';
