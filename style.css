@@ -1,0 +1,170 @@
+:root {
+    --atari-blue: #4444ff;
+    --atari-yellow: #ffff00;
+    --atari-red: #ff0000;
+    --atari-pink: #ffb8de;
+    --atari-cyan: #00ffff;
+    --atari-orange: #ffb847;
+    --bg-color: #050505;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: white;
+    font-family: 'Press Start 2P', cursive;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+}
+
+#game-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 2rem;
+    background: linear-gradient(145deg, #1a1a1a, #0a0a0a);
+    border-radius: 20px;
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.8), inset 0 0 10px rgba(255, 255, 255, 0.05);
+}
+
+#ui-layer {
+    width: 640px;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+}
+
+.score-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.label {
+    font-size: 0.6rem;
+    color: #888;
+    margin-bottom: 0.5rem;
+}
+
+#score, #high-score {
+    font-size: 1.2rem;
+    color: var(--atari-yellow);
+    text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.5);
+}
+
+#canvas-wrapper {
+    position: relative;
+    width: 640px; /* 160 * 4 */
+    height: 768px; /* 192 * 4 */
+    border: 15px solid #222;
+    border-radius: 30px;
+    overflow: hidden;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+}
+
+#game-canvas {
+    width: 100%;
+    height: 100%;
+    image-rendering: pixelated;
+    background-color: black;
+}
+
+/* CRT EFFECTS */
+#crt-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 10;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
+                linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+    background-size: 100% 3px, 3px 100%;
+    animation: flicker 0.15s infinite;
+}
+
+#crt-overlay::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: radial-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.4) 100%),
+                linear-gradient(0deg, transparent 0%, rgba(32, 128, 32, 0.05) 2%, rgba(32, 128, 32, 0.15) 50%, rgba(32, 128, 32, 0.05) 98%, transparent 100%);
+    opacity: 0.1;
+    pointer-events: none;
+}
+
+/* CRT Curve distortion (Vignette) */
+#crt-overlay::after {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: rgba(18, 16, 16, 0.1);
+  opacity: 0;
+  z-index: 2;
+  pointer-events: none;
+  animation: crt-glow 5s infinite;
+}
+
+#overlay-screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 20;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+#status-message {
+    font-size: 1.5rem;
+    color: var(--atari-yellow);
+    animation: blink 0.8s infinite;
+}
+
+@keyframes flicker {
+    0% { opacity: 0.95; }
+    100% { opacity: 1; }
+}
+
+@keyframes crt-glow {
+    0% { opacity: 0.1; }
+    50% { opacity: 0.2; }
+    100% { opacity: 0.1; }
+}
+
+@keyframes blink {
+    0%, 49% { opacity: 1; }
+    50%, 100% { opacity: 0; }
+}
+
+/* Subtle scanline move */
+#crt-overlay::before {
+    animation: scanline 10s linear infinite;
+}
+
+@keyframes scanline {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(100%); }
+}

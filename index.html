@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retro-Muncher | Atari Style Arcade</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="game-container">
+        <div id="ui-layer">
+            <div class="score-container">
+                <div class="label">PONTOS</div>
+                <div id="score">000000</div>
+            </div>
+            <div class="score-container">
+                <div class="label">RECORDE</div>
+                <div id="high-score">000000</div>
+            </div>
+        </div>
+
+        <div id="canvas-wrapper">
+            <canvas id="game-canvas"></canvas>
+            <div id="crt-overlay"></div>
+        </div>
+
+        <div id="overlay-screen">
+            <div id="status-message">PRESS START</div>
+        </div>
+    </div>
+
+    <script type="module" src="game.js"></script>
+</body>
+</html>
