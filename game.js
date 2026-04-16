@@ -46,7 +46,9 @@ class Game {
     bindEvents() {
         window.addEventListener('keydown', (e) => {
             if (this.state === 'INIT' || this.state === 'GAMEOVER') {
-                this.start();
+                if (e.key === 'Enter') {
+                    this.start();
+                }
                 return;
             }
 
@@ -166,9 +168,10 @@ class Game {
         this.state = 'GAMEOVER';
         document.getElementById('overlay-screen').style.display = 'flex';
         document.getElementById('status-message').innerText = 'GAME OVER';
+        document.getElementById('title-screen-content').style.display = 'flex'; // Ensure content visible
         this.lives = 3;
         setTimeout(() => {
-            document.getElementById('status-message').innerText = 'PRESS START';
+            document.getElementById('status-message').innerText = 'PRESS ENTER TO START';
             this.score = 0;
             document.getElementById('score').innerText = '000000';
             this.resetLevel();

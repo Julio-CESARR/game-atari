@@ -124,23 +124,79 @@ body {
   animation: crt-glow 5s infinite;
 }
 
-#overlay-screen {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+#title-screen-content {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    z-index: 20;
-    background: rgba(0, 0, 0, 0.3);
+    gap: 3rem;
+    text-align: center;
 }
 
+#game-logo {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    transform: skew(-5deg);
+}
+
+#game-logo .retro {
+    font-size: 2.5rem;
+    color: white;
+    text-shadow: 4px 4px 0px var(--atari-blue);
+}
+
+#game-logo .muncher {
+    font-size: 3.5rem;
+    background: linear-gradient(to bottom, var(--atari-yellow) 50%, #ffcc00 50%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(4px 4px 0px #886600);
+}
+
+.ghost-preview {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.mini-ghost {
+    width: 20px;
+    height: 20px;
+    border-radius: 10px 10px 0 0;
+    position: relative;
+    animation: bounce 0.5s infinite alternate ease-in-out;
+}
+
+.mini-ghost.red { background: var(--atari-red); box-shadow: 0 0 10px var(--atari-red); }
+.mini-ghost.pink { background: var(--atari-pink); box-shadow: 0 0 10px var(--atari-pink); animation-delay: 0.1s; }
+.mini-ghost.cyan { background: var(--atari-cyan); box-shadow: 0 0 10px var(--atari-cyan); animation-delay: 0.2s; }
+.mini-ghost.orange { background: var(--atari-orange); box-shadow: 0 0 10px var(--atari-orange); animation-delay: 0.3s; }
+
+.mini-ghost::before, .mini-ghost::after {
+    content: '';
+    position: absolute;
+    background: white;
+    width: 4px;
+    height: 4px;
+    top: 5px;
+}
+.mini-ghost::before { left: 4px; }
+.mini-ghost::after { right: 4px; }
+
 #status-message {
-    font-size: 1.5rem;
+    font-size: 1rem;
     color: var(--atari-yellow);
     animation: blink 0.8s infinite;
+}
+
+#controls-hint {
+    font-size: 0.6rem;
+    color: #666;
+    margin-top: 2rem;
+}
+
+@keyframes bounce {
+    from { transform: translateY(0); }
+    to { transform: translateY(-10px); }
 }
 
 @keyframes flicker {
