@@ -30,8 +30,8 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1rem;
-    padding: 2rem;
+    gap: 0.5rem; /* Reduced gap */
+    padding: 1rem; /* Reduced padding */
     background: linear-gradient(145deg, #1a1a1a, #0a0a0a);
     border-radius: 20px;
     box-shadow: 0 0 50px rgba(0, 0, 0, 0.8), inset 0 0 10px rgba(255, 255, 255, 0.05);
@@ -88,15 +88,15 @@ body {
 
 #canvas-wrapper {
     position: relative;
-    max-height: 70vh; /* Ensures it never takes too much vertical space */
+    max-height: 85vh; /* Larger limit to make maze bigger */
     aspect-ratio: 160 / 192;
     width: auto;
     height: auto;
     border: 10px solid #222;
-    border-radius: 20px;
+    border-radius: 15px;
     overflow: hidden;
     box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
-    display: flex; /* To contain canvas correctly */
+    display: flex;
 }
 
 #game-canvas {
