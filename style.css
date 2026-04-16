@@ -50,9 +50,13 @@ body {
     align-items: flex-start;
 }
 
+.score-container.center {
+    align-items: center;
+}
+
 .label {
-    font-size: 0.6rem;
-    color: #888;
+    font-size: 0.8rem; /* Slightly larger labels */
+    color: #fff;
     margin-bottom: 0.5rem;
 }
 
@@ -60,6 +64,26 @@ body {
     font-size: 1.2rem;
     color: var(--atari-yellow);
     text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.5);
+}
+
+#bottom-ui {
+    width: 640px;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: flex-start;
+}
+
+#lives-counter {
+    display: flex;
+    gap: 10px;
+}
+
+.mini-muncher {
+    width: 24px;
+    height: 24px;
+    background: var(--atari-yellow);
+    border-radius: 50%;
+    clip-path: polygon(100% 50%, 50% 50%, 100% 15%, 100% 0, 0 0, 0 100%, 100% 100%, 100% 85%);
 }
 
 #canvas-wrapper {

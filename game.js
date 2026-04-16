@@ -213,8 +213,18 @@ class Game {
             new Ghost(9, 10, "#00ffff", 'random'), new Ghost(10, 10, "#ffb847", 'timid')
         ];
         document.getElementById('high-score').innerText = this.highScore.toString().padStart(6, '0');
+        this.updateLivesUI();
         this.bindEvents();
         this.loop();
+    }
+    updateLivesUI() {
+        const container = document.getElementById('lives-counter');
+        container.innerHTML = '';
+        for (let i = 0; i < this.lives - 1; i++) {
+            const div = document.createElement('div');
+            div.className = 'mini-muncher';
+            container.appendChild(div);
+        }
     }
     bindEvents() {
         window.addEventListener('keydown', (e) => {
@@ -264,7 +274,9 @@ class Game {
         this.ft = setTimeout(() => { this.state = 'PLAYING'; this.ghosts.forEach(g => g.state = 'CHASE'); }, 7000);
     }
     die() {
-        this.lives--; this.state = 'DEATH'; audio.playDeath();
+        this.lives--; 
+        this.updateLivesUI();
+        this.state = 'DEATH'; audio.playDeath();
         if (this.lives <= 0) this.gameOver();
         else setTimeout(() => { this.muncher.x = 80; this.muncher.y = 120; this.state = 'PLAYING'; }, 2000);
     }
